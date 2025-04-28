@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetOfWorks | Empathy In Every Click</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f2f2f2;
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+      opacity: 0;
+      animation: pageFade 1s ease forwards;
+    }
+    @keyframes pageFade {
+      to { opacity: 1; }
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 50px;
+      background: #d1d1d1;
+      border-bottom: 1px solid #bbbbbb;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      margin: 0;
+      color: #000;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(-45deg, #007BFF, #00C9FF, #004CFF, #0099FF);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroSlide 8s ease-in-out infinite alternate;
+    }
+    @keyframes heroSlide {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+    .hero-content h1 {
+      font-size: 64px;
+      margin-bottom: 10px;
+    }
+    .hero-content h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .hero-content p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    .hero-content button {
+      background-color: #ffffff;
+      color: #007BFF;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .hero-content button:hover {
+      background-color: #0056b3;
+      color: #ffffff;
+    }
+    .floating-contact-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007BFF;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      animation: pulse 2s infinite;
+      z-index: 1000;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .floating-contact-button:hover {
+      background-color: #0056b3;
+    }
+    .section {
+      padding: 80px 50px;
+      text-align: center;
+    }
+    .about, .services, .contact {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-out;
+    }
+    .about.visible, .services.visible, .contact.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .services {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .service-card {
+      background: #ffffff;
+      padding: 30px;
+      margin: 15px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0px 12px 24px rgba(0, 123, 255, 0.2);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e0e0e0;
+      font-size: 14px;
+      color: #666666;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 2s ease;
+      position: relative;
+    }
+    form input, form textarea {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      padding: 10px;
+      width: 300px;
+      transition: all 0.3s ease;
+    }
+    form input:focus, form textarea:focus {
+      border-color: #007BFF;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+      outline: none;
+    }
+    form button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    form button:hover {
+      background-color: #0056b3;
+      transform: translateY(-3px);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .success-message {
+      display: none;
+      color: green;
+      margin-top: 20px;
+      font-weight: bold;
+      animation: fadeIn 2s ease forwards;
+    }
+    .footer-links {
+      margin-top: 10px;
+    }
+    .footer-links a {
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      document.querySelectorAll('.about, .services, .contact').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>NetOfWorks</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>NetOfWorks</h1>
+    <h2>Protect. Empower. Grow.</h2>
+    <p>Cybersecurity, IT Support, and Education – Built for Businesses and Communities.</p>
+    <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">Work With Us</button>
+  </div>
+</section>
+
+<a href="#contact" class="floating-contact-button">Contact Us</a>
+
+<section class="section about" id="about">
+  <h2>About NetOfWorks</h2>
+  <p>We secure businesses, support users, and train the next generation — specializing in protecting high-risk environments like nursing homes. Built on five years of high-level Department of Defense cybersecurity exposure, NetOfWorks delivers secure, empathetic technology solutions tailored for underserved communities and businesses.</p>
+</section>
+
+<section class="section services" id="services">
+  <h2>Our Core Services</h2>
+  <div class="services">
+    <div class="service-card">
+      <h3>Cybersecurity & Compliance Services</h3>
+      <p>Protecting systems and hardening infrastructures, specializing in high-risk sectors like nursing homes and healthcare facilities.</p>
+    </div>
+    <div class="service-card">
+      <h3>IT Support & Remote Helpdesk</h3>
+      <p>Providing responsive, reliable IT support for users and businesses, ensuring technology works seamlessly and securely.</p>
+    </div>
+    <div class="service-card">
+      <h3>Cyber Education & Training</h3>
+      <p>Teaching cybersecurity basics, certification preparation, and upskilling future tech professionals and teams.</p>
+    </div>
+    <div class="service-card">
+      <h3>Consulting & Strategy</h3>
+      <p>Guiding businesses to build cybersecurity programs, improve system resilience, and align with best practices.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background-color: #007BFF; color: white; padding: 60px 20px; text-align: center;">
+  <h2 style="font-size: 36px; margin-bottom: 20px;">Ready to Secure Your Future with NetOfWorks?</h2>
+  <p style="font-size: 18px; margin-bottom: 30px;">Partner with NetOfWorks to build, protect, and empower your business.</p>
+  <a href="#contact" style="background: white; color: #007BFF; padding: 12px 30px; border-radius: 5px; font-weight: bold; text-decoration: none; transition: background 0.3s;">Get Started</a>
+</section>
+
+<section class="section contact" id="contact">
+  <h2>Contact Us</h2>
+  <p>Ready to elevate your tech strategy? Let's connect.</p>
+  <form onsubmit="event.preventDefault(); document.getElementById('success').style.display='block';">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+    <div id="success" class="success-message">Thank you! Your message has been sent.</div>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 NetOfWorks. All Rights Reserved.
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
